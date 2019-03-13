@@ -19,3 +19,10 @@ parameters:
 	checkFunctionNameCase: true
 	reportMaybesInMethodSignatures: true
 	reportStaticMethodSignatures: true
+
+rules:
+	- PHPStan\Rules\Functions\MissingFunctionParameterTypehintRule
+	- PHPStan\Rules\Functions\MissingFunctionReturnTypehintRule
+	- PHPStan\Rules\Methods\MissingMethodParameterTypehintRule
+	- PHPStan\Rules\Methods\MissingMethodReturnTypehintRule
+	- PHPStan\Rules\Properties\MissingPropertyTypehintRule
