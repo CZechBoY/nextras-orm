@@ -8,6 +8,7 @@
 
 namespace Nextras\Orm\Mapper\Dbal;
 
+use Countable;
 use Iterator;
 use Nextras\Dbal\IConnection;
 use Nextras\Dbal\QueryBuilder\QueryBuilder;
@@ -175,7 +176,10 @@ class DbalCollection implements ICollection
 	}
 
 
-	public function getIterator()
+	/**
+	 * @return Countable&Iterator
+	 */
+	public function getIterator(): Iterator
 	{
 		if ($this->relationshipParent && $this->relationshipMapper) {
 			$entityIterator = $this->relationshipMapper->getIterator($this->relationshipParent, $this);
@@ -200,7 +204,7 @@ class DbalCollection implements ICollection
 	}
 
 
-	public function count()
+	public function count(): int
 	{
 		return iterator_count($this->getIterator());
 	}

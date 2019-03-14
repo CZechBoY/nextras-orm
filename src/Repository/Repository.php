@@ -186,7 +186,7 @@ abstract class Repository implements IRepository
 	}
 
 
-	/** @inheritdoc */
+	/** {@inheritdoc} */
 	public function getCollectionFunction(string $name)
 	{
 		if (!isset($this->collectionFunctions[$name])) {
@@ -344,7 +344,7 @@ abstract class Repository implements IRepository
 	}
 
 
-	/** @inheritdoc */
+	/** {@inheritdoc} */
 	public function doFlush()
 	{
 		$this->mapper->flush();

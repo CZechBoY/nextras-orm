@@ -8,6 +8,7 @@
 
 namespace Nextras\Orm\Mapper;
 
+use Countable;
 use Iterator;
 use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Entity\IEntity;
@@ -17,6 +18,7 @@ interface IRelationshipMapper
 {
 	/**
 	 * Returns iterator.
+	 * @return Countable&Iterator
 	 */
 	public function getIterator(IEntity $parent, ICollection $collection): Iterator;
 
