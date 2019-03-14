@@ -15,7 +15,7 @@ use Nextras\Orm\Mapper\Dbal\StorageReflection\IStorageReflection;
 
 class ColumnReference
 {
-	/** @var string|array */
+	/** @var string|string[] */
 	public $column;
 
 	/** @var PropertyMetadata */
@@ -28,6 +28,9 @@ class ColumnReference
 	public $storageReflection;
 
 
+	/**
+	 * @param string|string[] $column
+	 */
 	public function __construct($column, PropertyMetadata $propertyMetadata, EntityMetadata $entityMetadata, IStorageReflection $storageReflection)
 	{
 		$this->column = $column;

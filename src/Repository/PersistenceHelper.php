@@ -54,7 +54,7 @@ class PersistenceHelper
 	}
 
 
-	protected static function visitEntity(IEntity $entity, IModel $model, bool $withCascade = true)
+	protected static function visitEntity(IEntity $entity, IModel $model, bool $withCascade = true): void
 	{
 		$entityHash = spl_object_hash($entity);
 		if (isset(self::$outputQueue[$entityHash])) {
@@ -93,7 +93,7 @@ class PersistenceHelper
 	}
 
 
-	protected static function visitRelationship(IRelationshipCollection $rel, IModel $model)
+	protected static function visitRelationship(IRelationshipCollection $rel, IModel $model): void
 	{
 		foreach ($rel->getEntitiesForPersistence() as $entity) {
 			self::visitEntity($entity, $model);
@@ -103,7 +103,7 @@ class PersistenceHelper
 	}
 
 
-	protected static function addRelationshipToQueue(IEntity $entity, PropertyMetadata $propertyMeta, IModel $model)
+	protected static function addRelationshipToQueue(IEntity $entity, PropertyMetadata $propertyMeta, IModel $model): void
 	{
 		$isPersisted = $entity->isPersisted();
 		$rawValue = $entity->getRawProperty($propertyMeta->name);

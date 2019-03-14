@@ -19,7 +19,7 @@ class MultiEntityIterator implements IEntityPreloadContainer, Iterator, Countabl
 	/** @var int */
 	private $position = 0;
 
-	/** @var IEntity[][] */
+	/** @var array<int|string, IEntity[]> */
 	private $data;
 
 	/** @var IEntity[] */
@@ -29,6 +29,9 @@ class MultiEntityIterator implements IEntityPreloadContainer, Iterator, Countabl
 	private $preloadCache;
 
 
+	/**
+	 * @param array<int|string, IEntity[]> $data
+	 */
 	public function __construct(array $data)
 	{
 		$this->data = $data;
@@ -38,7 +41,7 @@ class MultiEntityIterator implements IEntityPreloadContainer, Iterator, Countabl
 	/**
 	 * @param string|int $index
 	 */
-	public function setDataIndex($index)
+	public function setDataIndex($index): void
 	{
 		if (!isset($this->data[$index])) {
 			$this->data[$index] = [];
@@ -48,7 +51,7 @@ class MultiEntityIterator implements IEntityPreloadContainer, Iterator, Countabl
 	}
 
 
-	public function next()
+	public function next(): void
 	{
 		++$this->position;
 	}
@@ -68,7 +71,7 @@ class MultiEntityIterator implements IEntityPreloadContainer, Iterator, Countabl
 	}
 
 
-	public function key()
+	public function key(): int
 	{
 		return $this->position;
 	}
@@ -80,7 +83,7 @@ class MultiEntityIterator implements IEntityPreloadContainer, Iterator, Countabl
 	}
 
 
-	public function rewind()
+	public function rewind(): void
 	{
 		$this->position = 0;
 	}

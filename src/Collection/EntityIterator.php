@@ -26,6 +26,9 @@ class EntityIterator implements IEntityPreloadContainer, Iterator, Countable
 	private $preloadCache;
 
 
+	/**
+	 * @param IEntity[] $data
+	 */
 	public function __construct(array $data)
 	{
 		$this->iteratable = $data;
@@ -52,7 +55,7 @@ class EntityIterator implements IEntityPreloadContainer, Iterator, Countable
 	}
 
 
-	public function key()
+	public function key(): int
 	{
 		return $this->position;
 	}
@@ -64,7 +67,7 @@ class EntityIterator implements IEntityPreloadContainer, Iterator, Countable
 	}
 
 
-	public function rewind()
+	public function rewind(): void
 	{
 		$this->position = 0;
 	}

@@ -32,7 +32,7 @@ abstract class BaseMapper implements IMapper
 	private $repository;
 
 
-	public function setRepository(IRepository $repository)
+	public function setRepository(IRepository $repository): void
 	{
 		if ($this->repository !== null && $this->repository !== $repository) {
 			$name = get_class($this);
@@ -78,11 +78,18 @@ abstract class BaseMapper implements IMapper
 
 
 	// Workaround for "Declaration should be compatible" in PHP 7.1 and Nette 2.4 & 3.0
+
+	/**
+	 * @return void
+	 */
 	public function __call(string $name, array $args)
 	{
 		$this->__smartCall($name, $args);
 	}
 
 
+	/**
+	 * @return IStorageReflection
+	 */
 	abstract protected function createStorageReflection();
 }

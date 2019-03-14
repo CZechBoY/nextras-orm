@@ -9,6 +9,7 @@
 namespace Nextras\Orm\Mapper\Memory;
 
 use ArrayIterator;
+use Countable;
 use Iterator;
 use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Entity\IEntity;
@@ -17,6 +18,9 @@ use Nextras\Orm\NotSupportedException;
 
 class RelationshipMapperOneHasOne extends RelationshipMapperOneHasMany
 {
+	/**
+	 * @return Countable&Iterator
+	 */
 	public function getIterator(IEntity $parent, ICollection $collection): Iterator
 	{
 		return new ArrayIterator([

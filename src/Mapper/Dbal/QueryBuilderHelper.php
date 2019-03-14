@@ -165,10 +165,8 @@ class QueryBuilderHelper
 				$this->makeDistinct($builder);
 
 				if ($property->relationship->isMain) {
-					assert($sourceMapper instanceof DbalMapper);
 					[$joinTable, [$inColumn, $outColumn]] = $sourceMapper->getManyHasManyParameters($property, $targetMapper);
 				} else {
-					assert($sourceMapper instanceof DbalMapper);
 					assert($property->relationship->property !== null);
 					$sourceProperty = $targetEntityMetadata->getProperty($property->relationship->property);
 					[$joinTable, [$outColumn, $inColumn]] = $targetMapper->getManyHasManyParameters($sourceProperty, $sourceMapper);
@@ -199,7 +197,7 @@ class QueryBuilderHelper
 
 
 	/**
-	 * @return string|array
+	 * @return string|string[]
 	 */
 	private function toColumnExpr(EntityMetadata $entityMetadata, PropertyMetadata $propertyMetadata, IStorageReflection $storageReflection, string $alias)
 	{

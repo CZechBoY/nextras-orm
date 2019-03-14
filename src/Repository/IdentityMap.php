@@ -65,7 +65,7 @@ class IdentityMap
 	}
 
 
-	public function add(IEntity $entity)
+	public function add(IEntity $entity): void
 	{
 		$id = $this->getIdHash($entity->getPersistedId());
 		$this->entities[$id] = $entity;
@@ -75,7 +75,7 @@ class IdentityMap
 	/**
 	 * @param  array|int|mixed $id
 	 */
-	public function remove($id)
+	public function remove($id): void
 	{
 		$idHash = $this->getIdHash($id);
 		$this->entities[$idHash] = false;
@@ -108,13 +108,13 @@ class IdentityMap
 	/**
 	 * @return IEntity[]
 	 */
-	public function getAll()
+	public function getAll(): array
 	{
 		return array_filter($this->entities);
 	}
 
 
-	public function check(IEntity $entity)
+	public function check(IEntity $entity): void
 	{
 		if (!in_array(get_class($entity), $this->repository->getEntityClassNames(), true)) {
 			throw new InvalidArgumentException("Entity '" . get_class($entity) . "' is not accepted by '" . get_class($this->repository) . "' repository.");
@@ -122,7 +122,7 @@ class IdentityMap
 	}
 
 
-	public function destroyAllEntities()
+	public function destroyAllEntities(): void
 	{
 		foreach ($this->entities as $entity) {
 			if ($entity) {
@@ -135,7 +135,7 @@ class IdentityMap
 	}
 
 
-	public function markForRefresh(IEntity $entity)
+	public function markForRefresh(IEntity $entity): void
 	{
 		$id = $this->getIdHash($entity->getPersistedId());
 		$this->entitiesForRefresh[$id] = true;

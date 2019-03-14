@@ -20,18 +20,22 @@ class TestMapper extends ArrayMapper
 	protected $methods = [];
 
 
-	public function addMethod(string $name, callable $callback)
+	public function addMethod(string $name, callable $callback): void
 	{
 		$this->methods[strtolower($name)] = $callback;
 	}
 
 
+	/**
+	 * @return mixed
+	 */
 	public function __call(string $name, array $args)
 	{
 		if (isset($this->methods[strtolower($name)])) {
 			return call_user_func_array($this->methods[strtolower($name)], $args);
 		} else {
-			return parent::__call($name, $args);
+			parent::__call($name, $args);
+			return;
 		}
 	}
 
@@ -42,7 +46,7 @@ class TestMapper extends ArrayMapper
 	}
 
 
-	protected function saveData(array $data)
+	protected function saveData(array $data): void
 	{
 		$this->storage = serialize($data);
 	}

@@ -114,7 +114,6 @@ class ModifierParser
 	{
 		$result = [];
 		while (($currentToken = $iterator->nextToken()) !== null) {
-			assert($currentToken !== null);
 			$type = $currentToken->type;
 
 			if ($type === self::TOKEN_RBRACKET) {

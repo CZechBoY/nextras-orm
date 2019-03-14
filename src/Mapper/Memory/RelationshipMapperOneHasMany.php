@@ -8,12 +8,12 @@
 
 namespace Nextras\Orm\Mapper\Memory;
 
+use Countable;
 use Iterator;
 use Nextras\Orm\Collection\EntityIterator;
 use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Entity\IEntity;
 use Nextras\Orm\Entity\Reflection\PropertyMetadata;
-use Nextras\Orm\Entity\Reflection\PropertyRelationshipMetadata;
 use Nextras\Orm\Mapper\IRelationshipMapper;
 
 
@@ -35,11 +35,14 @@ class RelationshipMapperOneHasMany implements IRelationshipMapper
 	}
 
 
-	public function clearCache()
+	public function clearCache(): void
 	{
 	}
 
 
+	/**
+	 * @return Countable&Iterator
+	 */
 	public function getIterator(IEntity $parent, ICollection $collection): Iterator
 	{
 		assert($this->metadata->relationship !== null);

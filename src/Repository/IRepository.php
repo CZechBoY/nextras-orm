@@ -21,6 +21,9 @@ interface IRepository
 	public function getModel(): IModel;
 
 
+	/**
+	 * @return void
+	 */
 	public function setModel(IModel $model);
 
 
@@ -35,12 +38,14 @@ interface IRepository
 
 	/**
 	 * Attaches entity to repository.
+	 * @return void
 	 */
 	public function attach(IEntity $entity);
 
 
 	/**
 	 * Detaches entity from repository.
+	 * @return void
 	 */
 	public function detach(IEntity $entity);
 
@@ -118,6 +123,7 @@ interface IRepository
 
 	/**
 	 * Flushes all persisted changes in all repositories.
+	 * @return void
 	 */
 	public function flush();
 
@@ -126,6 +132,7 @@ interface IRepository
 	 * DO NOT CALL THIS METHOD DIRECTLY.
 	 * @internal
 	 * @ignore
+	 * @return void
 	 */
 	public function doPersist(IEntity $entity);
 
@@ -134,6 +141,7 @@ interface IRepository
 	 * DO NOT CALL THIS METHOD DIRECTLY.
 	 * @internal
 	 * @ignore
+	 * @return void
 	 */
 	public function doRemove(IEntity $entity);
 
@@ -153,6 +161,7 @@ interface IRepository
 	 * DO NOT CALL THIS METHOD DIRECTLY.
 	 * @internal
 	 * @ignore
+	 * @return void
 	 */
 	public function doClear();
 
@@ -162,6 +171,7 @@ interface IRepository
 	 * Fires the event on the entity.
 	 * @internal
 	 * @ignore
+	 * @return void
 	 */
 	public function doRefreshAll(bool $allowOverwrite): void;
 
@@ -169,27 +179,51 @@ interface IRepository
 	// === events ======================================================================================================
 
 
-	/** @internal */
+	/**
+	 * @internal
+	 * @return void
+	 */
 	public function onBeforePersist(IEntity $entity);
 
-	/** @internal */
+	/**
+	 * @internal
+	 * @return void
+	 */
 	public function onAfterPersist(IEntity $entity);
 
-	/** @internal */
+	/**
+	 * @internal
+	 * @return void
+	 */
 	public function onBeforeInsert(IEntity $entity);
 
-	/** @internal */
+	/**
+	 * @internal
+	 * @return void
+	 */
 	public function onAfterInsert(IEntity $entity);
 
-	/** @internal */
+	/**
+	 * @internal
+	 * @return void
+	 */
 	public function onBeforeUpdate(IEntity $entity);
 
-	/** @internal */
+	/**
+	 * @internal
+	 * @return void
+	 */
 	public function onAfterUpdate(IEntity $entity);
 
-	/** @internal */
+	/**
+	 * @internal
+	 * @return void
+	 */
 	public function onBeforeRemove(IEntity $entity);
 
-	/** @internal */
+	/**
+	 * @internal
+	 * @return void
+	 */
 	public function onAfterRemove(IEntity $entity);
 }

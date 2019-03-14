@@ -37,7 +37,7 @@ class EntityCreator
 	}
 
 
-	protected function fill(IEntity $entity, array $params)
+	protected function fill(IEntity $entity, array $params): void
 	{
 		foreach ($entity->getMetadata()->getProperties() as $property) {
 			if ($property->isReadonly) {
@@ -60,7 +60,7 @@ class EntityCreator
 	}
 
 
-	protected function random(PropertyMetadata $property)
+	protected function random(PropertyMetadata $property): ?IEntity
 	{
 		if ($property->relationship && in_array($property->relationship->type, [
 				PropertyRelationshipMetadata::MANY_HAS_ONE,

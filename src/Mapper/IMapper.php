@@ -46,7 +46,7 @@ interface IMapper
 	public function createCollectionOneHasMany(PropertyMetadata $metadata): ICollection;
 
 
-	public function setRepository(IRepository $repository);
+	public function setRepository(IRepository $repository): void;
 
 
 	public function getRepository(): IRepository;
@@ -54,12 +54,14 @@ interface IMapper
 
 	/**
 	 * @see IRepository::persist()
+	 * @return mixed
 	 */
 	public function persist(IEntity $entity);
 
 
 	/**
 	 * @see IRepository::remove()
+	 * @return void
 	 */
 	public function remove(IEntity $entity);
 
@@ -73,6 +75,7 @@ interface IMapper
 	/**
 	 * Clears cache object for collection.
 	 * @internal
+	 * @return void
 	 */
 	public function clearCache();
 }

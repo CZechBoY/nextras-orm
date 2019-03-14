@@ -44,6 +44,10 @@ class ValueOperatorFunction implements IArrayFilterFunction, IQueryBuilderFilter
 	}
 
 
+	/**
+	 * @param mixed $targetValue
+	 * @param mixed $sourceValue
+	 */
 	private function arrayEvaluate(string $operator, $targetValue, $sourceValue): bool
 	{
 		if ($operator === ConditionParserHelper::OPERATOR_EQUAL) {
@@ -90,7 +94,11 @@ class ValueOperatorFunction implements IArrayFilterFunction, IQueryBuilderFilter
 	}
 
 
-	private function qbEqualOperator($column, $value)
+	/**
+	 * @param string|string[] $column
+	 * @param bool|float|int|string|bool[]|float[]|int[]|string[]|null $value
+	 */
+	private function qbEqualOperator($column, $value): array
 	{
 		if (is_array($value)) {
 			if ($value) {
@@ -113,7 +121,11 @@ class ValueOperatorFunction implements IArrayFilterFunction, IQueryBuilderFilter
 	}
 
 
-	private function qbNotEqualOperator($column, $value)
+	/**
+	 * @param string|string[] $column
+	 * @param bool|float|int|string|bool[]|float[]|int[]|string[]|null $value
+	 */
+	private function qbNotEqualOperator($column, $value): array
 	{
 		if (is_array($value)) {
 			if ($value) {
@@ -136,7 +148,11 @@ class ValueOperatorFunction implements IArrayFilterFunction, IQueryBuilderFilter
 	}
 
 
-	private function qbOtherOperator($operator, $column, $value)
+	/**
+	 * @param string|string[] $column
+	 * @param bool|float|int|string|bool[]|float[]|int[]|string[]|null $value
+	 */
+	private function qbOtherOperator(string $operator, $column, $value): array
 	{
 		return ["%column $operator %any", $column, $value];
 	}

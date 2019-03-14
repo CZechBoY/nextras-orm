@@ -21,6 +21,7 @@ use Nextras\Orm\Mapper\BaseMapper;
 use Nextras\Orm\Mapper\IMapper;
 use Nextras\Orm\Relationships\IRelationshipCollection;
 use Nextras\Orm\StorageReflection\CommonReflection;
+use Nextras\Orm\StorageReflection\IStorageReflection;
 
 
 abstract class ArrayMapper extends BaseMapper
@@ -92,13 +93,13 @@ abstract class ArrayMapper extends BaseMapper
 	}
 
 
-	public function clearCache()
+	public function clearCache(): void
 	{
 		$this->data = null;
 	}
 
 
-	public function &getRelationshipDataStorage($key)
+	public function &getRelationshipDataStorage($key): array
 	{
 		$value = & $this->relationshipData[$key];
 		$value = (array) $value;
@@ -106,6 +107,9 @@ abstract class ArrayMapper extends BaseMapper
 	}
 
 
+	/**
+	 * @return mixed
+	 */
 	public function persist(IEntity $entity)
 	{
 		$this->initializeData();
@@ -145,7 +149,7 @@ abstract class ArrayMapper extends BaseMapper
 	}
 
 
-	public function remove(IEntity $entity)
+	public function remove(IEntity $entity): void
 	{
 		$this->initializeData();
 		$id = $this->getIdHash($entity->getPersistedId());
@@ -165,13 +169,13 @@ abstract class ArrayMapper extends BaseMapper
 	}
 
 
-	public function rollback()
+	public function rollback(): void
 	{
 		$this->data = null;
 	}
 
 
-	protected function createStorageReflection()
+	protected function createStorageReflection(): IStorageReflection
 	{
 		return new CommonReflection(
 			$this,
@@ -181,7 +185,7 @@ abstract class ArrayMapper extends BaseMapper
 	}
 
 
-	protected function initializeData()
+	protected function initializeData(): void
 	{
 		if ($this->data !== null) {
 			return;
@@ -207,7 +211,7 @@ abstract class ArrayMapper extends BaseMapper
 	}
 
 
-	protected function getData()
+	protected function getData(): array
 	{
 		$this->initializeData();
 		assert($this->data !== null);
@@ -215,7 +219,7 @@ abstract class ArrayMapper extends BaseMapper
 	}
 
 
-	protected function lock()
+	protected function lock(): void
 	{
 		if (self::$lock) {
 			throw new LogicException('Critical section has already beed entered.');
@@ -232,7 +236,7 @@ abstract class ArrayMapper extends BaseMapper
 	}
 
 
-	protected function unlock()
+	protected function unlock(): void
 	{
 		if (!self::$lock) {
 			throw new LogicException('Critical section has not been initialized.');
@@ -272,7 +276,7 @@ abstract class ArrayMapper extends BaseMapper
 	}
 
 
-	protected function readEntityData()
+	protected function readEntityData(): array
 	{
 		[$data, $relationshipData] = $this->readData() ?: [[], []];
 		if (!$this->relationshipData) {
@@ -282,7 +286,7 @@ abstract class ArrayMapper extends BaseMapper
 	}
 
 
-	protected function saveEntityData(array $data)
+	protected function saveEntityData(array $data): void
 	{
 		$this->saveData([$data, $this->relationshipData]);
 	}
@@ -318,6 +322,8 @@ abstract class ArrayMapper extends BaseMapper
 
 	/**
 	 * Stores data
+	 *
+	 * @return void
 	 */
 	abstract protected function saveData(array $data);
 }

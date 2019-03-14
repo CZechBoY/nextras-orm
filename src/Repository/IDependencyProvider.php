@@ -15,6 +15,7 @@ interface IDependencyProvider
 {
 	/**
 	 * Injects required dependencies into the entity.
+	 * @return mixed
 	 */
 	public function injectDependencies(IEntity $entity);
 }

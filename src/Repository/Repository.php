@@ -281,7 +281,9 @@ abstract class Repository implements IRepository
 			$this->onBeforeInsert($entity);
 		}
 
-		$isPersisted && $this->identityMap->remove($entity->getPersistedId()); // id can change in composite key
+		if ($isPersisted) { // id can change in composite key
+			$this->identityMap->remove($entity->getPersistedId());
+		}
 		$id = $this->mapper->persist($entity);
 		$entity->onPersist($id);
 		$this->identityMap->add($entity);

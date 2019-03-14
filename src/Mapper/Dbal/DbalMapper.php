@@ -231,7 +231,7 @@ class DbalMapper extends BaseMapper
 	}
 
 
-	protected function createStorageReflection()
+	protected function createStorageReflection(): IStorageReflection
 	{
 		return new StorageReflection\UnderscoredStorageReflection(
 			$this->connection,
@@ -274,7 +274,7 @@ class DbalMapper extends BaseMapper
 	}
 
 
-	protected function processInsert(IEntity $entity, $data)
+	protected function processInsert(IEntity $entity, $data): void
 	{
 		$args = ['INSERT INTO %table %values', $this->getTableName(), $data];
 		if ($this instanceof IPersistAutoupdateMapper) {
@@ -285,7 +285,7 @@ class DbalMapper extends BaseMapper
 	}
 
 
-	protected function processUpdate(IEntity $entity, $data, $primary)
+	protected function processUpdate(IEntity $entity, $data, $primary): void
 	{
 		if (empty($data)) {
 			return;
@@ -300,7 +300,7 @@ class DbalMapper extends BaseMapper
 	}
 
 
-	protected function processAutoupdate(IEntity $entity, array $args)
+	protected function processAutoupdate(IEntity $entity, array $args): void
 	{
 		$platform = $this->connection->getPlatform()->getName();
 		if ($platform === 'pgsql') {
@@ -313,7 +313,7 @@ class DbalMapper extends BaseMapper
 	}
 
 
-	protected function processPostgreAutoupdate(IEntity $entity, array $args)
+	protected function processPostgreAutoupdate(IEntity $entity, array $args): void
 	{
 		assert($this instanceof IPersistAutoupdateMapper);
 		$args[] = 'RETURNING %ex';
@@ -328,7 +328,7 @@ class DbalMapper extends BaseMapper
 	}
 
 
-	protected function processMySQLAutoupdate(IEntity $entity, array $args)
+	protected function processMySQLAutoupdate(IEntity $entity, array $args): void
 	{
 		assert($this instanceof IPersistAutoupdateMapper);
 		$this->connection->queryArgs($args);
@@ -355,7 +355,7 @@ class DbalMapper extends BaseMapper
 	}
 
 
-	public function remove(IEntity $entity)
+	public function remove(IEntity $entity): void
 	{
 		$this->beginTransaction();
 
@@ -370,13 +370,13 @@ class DbalMapper extends BaseMapper
 	}
 
 
-	protected function processRemove(IEntity $entity, $primary)
+	protected function processRemove(IEntity $entity, $primary): void
 	{
 		$this->connection->query('DELETE FROM %table WHERE %and', $this->getTableName(), $primary);
 	}
 
 
-	protected function entityToArray(IEntity $entity)
+	protected function entityToArray(IEntity $entity): array
 	{
 		$return = [];
 		$metadata = $entity->getMetadata();
@@ -417,7 +417,7 @@ class DbalMapper extends BaseMapper
 	// == Transactions API =============================================================================================
 
 
-	public function beginTransaction()
+	public function beginTransaction(): void
 	{
 		$this->mapperCoordinator->beginTransaction();
 	}
@@ -430,7 +430,7 @@ class DbalMapper extends BaseMapper
 	}
 
 
-	public function rollback()
+	public function rollback(): void
 	{
 		$this->mapperCoordinator->rollback();
 	}
